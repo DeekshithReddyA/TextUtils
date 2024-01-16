@@ -1,10 +1,16 @@
 import './App.css'; 
 import Alert from './components/Alert';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import { useState } from 'react';
-
+import {
+  HashRouter,
+  Routes,
+  RouterProvider,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   const [alert,setAlert] =useState(null);
@@ -35,7 +41,7 @@ function App() {
     // setInterval(() => {
     //   document.title = "Install TextUtils Now";
     // }, 1500);
-    }
+    }   
     else{
       setMode('light')
       document.body.style.backgroundColor = 'white';
@@ -48,11 +54,12 @@ function App() {
   return (
     <>
     <Navbar logotitle="TextUtils" aboutText="About" mode ={mode} toggleMode={toggleMode}/>
-    {/* <Navbar aboutText='About'/> */}
-    <Alert alert={alert}/>
+    <Alert alert={alert} />
     <div className="container my-3">
-    <TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>
-    {/* <About/> */}
+    <Routes>
+    <Route path = "/" element = {<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>} />
+    <Route path="/about" element = {<About mode={mode}/>} />
+    </Routes>
     </div>
     </>
   );
